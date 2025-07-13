@@ -25,6 +25,19 @@ spec:
           value: gp2
         - name: primary.initdb.scriptsConfigMap
           value: postgresql-init-sql
+        
+        # Adding tolerations to tolerate the taint on the database nodes
+        - name: primary.tolerations[0].key
+          value: workload
+        - name: primary.tolerations[0].value
+          value: database
+        - name: primary.tolerations[0].effect
+          value: NoSchedule
+
+        # Add nodeSelector so pods are scheduled on database nodes specifically
+        - name: primary.NodeSelector.workload
+          value: database
+
   destination:
     server: https://kubernetes.default.svc
     namespace: postgresql
