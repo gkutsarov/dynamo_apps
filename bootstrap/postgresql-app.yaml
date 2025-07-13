@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresql
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 16.7.18
+    helm:
+      parameters:
+        - name: auth.existingSecret
+          value: postgresqlsecret
+        - name: auth.database
+          value: mydb
+        - name: auth.username
+          value: grozdimir
+        - name: primary.persistence.enabled
+          value: "true"
+        - name: primary.persistence.size
+          value: 8Gi
+        - name: primary.persistence.storageClass
+          value: gp2
+        - name: primary.initdb.scriptsConfigMap
+          value: postgresql-init-sql
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgresql
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
