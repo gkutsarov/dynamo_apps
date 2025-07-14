@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/gkutsarov/dynamo_apps.git
     targetRevision: main
-    path: python-app/
+    path: python-app
   destination:
     server: https://kubernetes.default.svc
     namespace: python-app
