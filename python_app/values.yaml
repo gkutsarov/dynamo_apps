@@ -19,15 +19,3 @@ env:
     name: python-app-to-postgresql
     key: password
 
-# ingress:
-#   enabled: true
-#   name: flask-crud-ingress
-#   annotations:
-#     alb.ingress.kubernetes.io/scheme: internet-facing
-#     alb.ingress.kubernetes.io/ingress.class: alb
-#     alb.ingress.kubernetes.io/target-type: ip
-#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-#   paths:
-#     - path: /
-#       pathType: Prefix
-#   host: ""
