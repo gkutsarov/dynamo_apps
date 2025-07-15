@@ -11,19 +11,19 @@ spec:
     targetRevision: 16.7.18
     helm:
       parameters:
-        - name: auth.existingSecret
+        - name: auth.existingSecret # don't auto generate credentials, but use postgresqlsecret
           value: postgresqlsecret
-        - name: auth.database
+        - name: auth.database # create database called mydb
           value: mydb
-        - name: auth.username
+        - name: auth.username # create non-root database user
           value: grozdimir
-        - name: primary.persistence.enabled
+        - name: primary.persistence.enabled # enables persistent storage for the PostgreSQL pod
           value: "true"
-        - name: primary.persistence.size
+        - name: primary.persistence.size # Size of the persistent PVC
           value: 8Gi
-        - name: primary.persistence.storageClass
+        - name: primary.persistence.storageClass # Set the storageclass which will be used by the PVC
           value: gp2
-        - name: primary.initdb.scriptsConfigMap
+        - name: primary.initdb.scriptsConfigMap # custom configmap for configuration
           value: postgresql-init-sql
         
         # Adding tolerations to tolerate the taint on the database nodes
